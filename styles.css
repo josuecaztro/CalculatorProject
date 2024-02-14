@@ -1,0 +1,34 @@
+body {
+    background-color: rgb(106, 106, 121);
+}
+
+#body-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#display {
+    background-color: lightgray;
+    padding: 5px;
+}
+
+#calculator-div {
+    background-color: rgb(67, 67, 121);
+    border: 5px groove rgb(55, 55, 100);
+    width: 100px;
+    padding: 15px;
+    justify-content: center;
+    align-items: center;
+}
+
+#calc-buttons {
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+p {
+    font-size: 10px;
+    color: white;
+}
