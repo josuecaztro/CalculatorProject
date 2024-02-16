@@ -6,22 +6,26 @@ let secondNum;
 let operator;
 let inLingo;
 let tally = 0;
-let chainTally = 0;
 let firstNumGiven = false;
 let secondNumGiven = false;
+let operatorGiven = false;
 let addButton = document.querySelector("#adder");
 let subtractButton = document.querySelector("#subtracter");
 let multiplyButton = document.querySelector("#multiplier");
 let divideButton = document.querySelector("#divider");
 let equalsButton = document.querySelector("#equals");
 let clearButton = document.querySelector("#clear");
+
+
 //this function make seem extra, but it's to ensure all variables and displays are CLEARED.
 function fullClear (){
     firstNum = 0;
     secondNum = 0;
     displayDiv.textContent = "0";
     tally = 0;
-    chainTally = 0;
+    firstNumGiven = false;
+    secondNumGiven = false;
+    operatorGiven = false;
 }
 clearButton.addEventListener("click", () => {
     fullClear();
@@ -56,8 +60,6 @@ function operate (x,y,z){
 }
 
 
-
-
 /*
 Declaring functions and variables 👆🏼
 🛑
@@ -70,10 +72,18 @@ Managing logic and functionality 👇🏽
 let allNumberButtons = document.querySelectorAll(".num-button");
 allNumberButtons.forEach(item => {
     item.addEventListener("click", () => {
+
     if (tally >= 1){
         displayDiv.textContent = "";
     }
+    if (tally >= 1 && operatorGiven === true){
+        displayDiv.textContent = "";
+    }
+   
+
     displayDiv.textContent += item.textContent;
+
+
     //this code here is just to get rid of the beginning 0 in display
     let tempDisplay = displayDiv.textContent;
     if (tempDisplay[0] === "0"){
@@ -91,9 +101,24 @@ operatorList.forEach(item => {
         firstNum = displayDiv.textContent;
         firstNumGiven = true;
         }
+
         if (tally > 1){
             equalsFunction();
         }
+        
+        /*
+        if (tally > 1 && secondNumGiven === true){
+            equalsFunction();
+        }
+
+        //make another but don't do equals just fill in second number. than do equalsfunctions
+        
+        if (tally > 1 && secondNumGiven === false){
+            secondNumGiven = false;
+        }
+        */
+
+        operatorGiven = true;
         operator = item.textContent;
     })
 })
@@ -101,31 +126,69 @@ operatorList.forEach(item => {
 
 //POPULATE A SOLUTION 
 equalsButton.addEventListener("click", equalsFunction);
-
+   
 function equalsFunction (){
-    chainTally++;
-    if (firstNumGiven === true){
+    tally++;
+    if (firstNumGiven === true && operatorGiven === true){
         secondNum = displayDiv.textContent;
         secondNumGiven = true;
     }
-    if (chainTally > 1){
-        firstNum = inLingo;
-    }
-    
+  
+
     let solution = operate(firstNum, operator, secondNum);
     displayDiv.textContent = solution;
     
 
     //FOR DEBUGGING PURPOSES
-    console.log("First Num: " + firstNum);
-    console.log("Operator: " + operator);
-    console.log("Second Num: " + secondNum);
-    console.log("Solution: " + solution);
+    console.log("Equation Solved: " + firstNum + operator + secondNum + "=" + solution);
     console.log("Tally #: " + tally);
-    console.log("chainTally: " + chainTally);
 
-
+    
     inLingo = solution;
+    refreshEquation();
+
+    //if (tally > 1){}
+
+    
+
     return solution;
 }
+
+function refreshEquation (){
+    firstNum = displayDiv.textContent;
+    secondNum = 0;
+    secondNumGiven = false;
+    operatorGiven = false;
+}
+
+
+
+
+
+
+//ur trying to make refresh equation clear whats happening
+//it sorta solves ur first bug but makes more smalelr bugs....
+//its because my tally system is fucked. i need to fix that system
+
+//how about a function that takes ur equation and sets up a new one to cycle as many as u can
+
+/*
+let currentFirst;
+let currentOperator;
+let currentSecond;
+*/
+
+/*
+function transitionNextEquation () {
+    first off this function is invoked when an operator is pressed
+     (not the 1st time! you can use tally for this) 
+     //FIRST BEFORE ANYTHING- IT MUST DO OPERATE() FUNCTION TO RETURN AN ANSWER
+     //first thing make that operator clicked the new current Operator
+    //display solution in display div
+    //make solution currentFirst 
+}
+*/
+
+    
+
 

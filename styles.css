@@ -16,7 +16,9 @@ body {
 
 #calculator-div {
     background-color: rgb(67, 67, 121);
-    border: 5px groove rgb(55, 55, 100);
+    border: 5px solid rgb(55, 55, 100);
+    border-radius: 7.5%;
+    box-shadow: 2px 2px 2px black;
     width: 100px;
     padding: 15px;
     justify-content: center;
