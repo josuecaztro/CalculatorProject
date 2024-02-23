@@ -15,6 +15,7 @@ let multiplyButton = document.querySelector("#multiplier");
 let divideButton = document.querySelector("#divider");
 let equalsButton = document.querySelector("#equals");
 let clearButton = document.querySelector("#clear");
+let clearDisplay = false;
 
 
 //this function make seem extra, but it's to ensure all variables and displays are CLEARED.
@@ -46,16 +47,23 @@ function multiply (a,b){
 function divide (a,b){
     return a / b;
 }
+function formatNumber (x){
+    if (x % 1 != 0){
+    return x.toFixed(8);
+    } else {
+        return x;
+    }
+}
 //This function should be invoked whenever "=" is pressed.
 function operate (x,y,z){
     if (y === "+"){
-        return add(x,z);
+        return formatNumber(add(x,z));
     } else if (y === "-"){
-        return subtract(x,z);
+        return formatNumber(subtract(x,z));
     } else if (y === "X"){
-        return multiply(x,z);
+        return formatNumber(multiply(x,z));
     } else if (y === "%"){
-        return divide(x,z);
+        return formatNumber(divide(x,z));
     }
 }
 
@@ -73,15 +81,19 @@ let allNumberButtons = document.querySelectorAll(".num-button");
 allNumberButtons.forEach(item => {
     item.addEventListener("click", () => {
 
-    if (tally >= 1){
-        displayDiv.textContent = "";
-    }
-    if (tally >= 1 && operatorGiven === true){
-        displayDiv.textContent = "";
+    if (operatorGiven === true){
+        
+        if (!clearDisplay){
+        displayDiv.textContent = ""; //MAKE THIS ONLY HAPPEN ONCE AND U SOLVE SECONDNUM BUG
+        clearDisplay = true;
+        }
+
+        displayDiv.textContent += item.textContent;
+    } else {
+        displayDiv.textContent += item.textContent;
     }
    
 
-    displayDiv.textContent += item.textContent;
 
 
     //this code here is just to get rid of the beginning 0 in display
@@ -104,6 +116,7 @@ operatorList.forEach(item => {
 
         if (tally > 1){
             equalsFunction();
+            clearDisplay = false;
         }
         
         /*
@@ -117,8 +130,8 @@ operatorList.forEach(item => {
             secondNumGiven = false;
         }
         */
-
         operatorGiven = true;
+
         operator = item.textContent;
     })
 })
@@ -128,16 +141,16 @@ operatorList.forEach(item => {
 equalsButton.addEventListener("click", equalsFunction);
    
 function equalsFunction (){
-    tally++;
+
     if (firstNumGiven === true && operatorGiven === true){
+        tally++;
+
         secondNum = displayDiv.textContent;
         secondNumGiven = true;
-    }
-  
+    
 
     let solution = operate(firstNum, operator, secondNum);
     displayDiv.textContent = solution;
-    
 
     //FOR DEBUGGING PURPOSES
     console.log("Equation Solved: " + firstNum + operator + secondNum + "=" + solution);
@@ -148,10 +161,12 @@ function equalsFunction (){
     refreshEquation();
 
     //if (tally > 1){}
+    
+    return solution;
+        
+}
 
     
-
-    return solution;
 }
 
 function refreshEquation (){
