@@ -17,7 +17,6 @@ let equalsButton = document.querySelector("#equals");
 let clearButton = document.querySelector("#clear");
 let clearDisplay = false;
 let decimalButton = document.querySelector("#decimal");
-let backSpaceButton = document.querySelector("#backspace");
 
 
 //this function make seem extra, but it's to ensure all variables and displays are CLEARED.
@@ -214,20 +213,6 @@ function refreshEquation (){
     secondNumGiven = false;
     operatorGiven = false;
 }
-
-function backSpace (){
-    let tempArray = displayDiv.textContent.split("");
-    tempArray.pop();
-    let newTempArray = tempArray.join("");
-    displayDiv.textContent = newTempArray;
-    console.log(tempArray);
-    //take display text content make it into a split array
-    //remove last element of array
-    //join together make array a string again
-    //return new complete string back into display div content
-}
-backSpaceButton.addEventListener("click", backSpace);
-
 
 
 
