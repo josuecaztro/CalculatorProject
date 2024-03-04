@@ -52,15 +52,24 @@ function divide (a,b){
 }
 function formatNumber (x){
     let decimalPlaces;
+    //halleluyah is just another word for solution.
+    //the whole point of halleluyah was to get rid of extra decimals JS error.
+    let halleluyah;
     if (x % 1 != 0){
     decimalPlaces = x.toString().split(".")[1].length;
-    if (decimalPlaces >= 8){
-        return x.toFixed(9);
-    }
+    console.log("decimal places: " + decimalPlaces);
+        if (decimalPlaces >= 8){
+        halleluyah = x.toFixed(9);
+        if (halleluyah.includes(".")){
+            halleluyah = halleluyah.replace(/(?:\.0+|(\.\d+?)0+)$/, "$1");
+        }
+        return halleluyah;
+        }
     return x;
     } else { 
         return x;
     }
+    
 }
 
 //This function should be invoked whenever "=" is pressed.
