@@ -16,6 +16,8 @@ let divideButton = document.querySelector("#divider");
 let equalsButton = document.querySelector("#equals");
 let clearButton = document.querySelector("#clear");
 let clearDisplay = false;
+let decimalButton = document.querySelector("#decimal");
+let backSpaceButton = document.querySelector("#backspace");
 
 
 //this function make seem extra, but it's to ensure all variables and displays are CLEARED.
@@ -35,9 +37,9 @@ clearButton.addEventListener("click", () => {
 let operatorList = [addButton, subtractButton, multiplyButton, divideButton];
 //Basic Calculator Functions
 function add (a,b){
-    a = parseInt(a);
-    b = parseInt(b);
-    return a + b;
+    ax = parseFloat(a);
+    bx = parseFloat(b);
+    return ax + bx;
 }
 function subtract (a,b){
     return a - b;
@@ -69,6 +71,11 @@ function operate (x,y,z){
         return formatNumber(subtract(x,z));
     } else if (y === "X"){
         return formatNumber(multiply(x,z));
+    }
+
+    if (y === "%" && z === "0" || y === "%" && z === 0){
+        alert("You can't divide by zero, smart-ass.")
+        location.reload();
     } else if (y === "%"){
         return formatNumber(divide(x,z));
     }
@@ -104,13 +111,29 @@ allNumberButtons.forEach(item => {
 
 
     //this code here is just to get rid of the beginning 0 in display
+    if (operatorGiven === false){
     let tempDisplay = displayDiv.textContent;
     if (tempDisplay[0] === "0"){
     displayDiv.textContent = tempDisplay.slice(1);
     }
+    };
   
     });
 });
+
+decimalButton.addEventListener("click", () => {
+    if (operatorGiven === true){
+
+    if (!clearDisplay){
+        displayDiv.textContent = "";
+        clearDisplay = true;
+        }
+    
+    displayDiv.textContent += decimalButton.textContent;
+    } else {
+        displayDiv.textContent += decimalButton.textContent;
+    }
+})
 
 //OPERATOR EVENTS + FUNCTIONS 
 operatorList.forEach(item => {
@@ -183,7 +206,18 @@ function refreshEquation (){
     operatorGiven = false;
 }
 
-
+function backSpace (){
+    let tempArray = displayDiv.textContent.split("");
+    tempArray.pop();
+    let newTempArray = tempArray.join("");
+    displayDiv.textContent = newTempArray;
+    console.log(tempArray);
+    //take display text content make it into a split array
+    //remove last element of array
+    //join together make array a string again
+    //return new complete string back into display div content
+}
+backSpaceButton.addEventListener("click", backSpace);
 
 
 
