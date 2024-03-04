@@ -27,6 +27,7 @@ function fullClear (){
     firstNumGiven = false;
     secondNumGiven = false;
     operatorGiven = false;
+    clearDisplay = false;
 }
 clearButton.addEventListener("click", () => {
     fullClear();
@@ -48,12 +49,18 @@ function divide (a,b){
     return a / b;
 }
 function formatNumber (x){
+    let decimalPlaces;
     if (x % 1 != 0){
-    return x.toFixed(8);
-    } else {
+    decimalPlaces = x.toString().split(".")[1].length;
+    if (decimalPlaces >= 8){
+        return x.toFixed(9);
+    }
+    return x;
+    } else { 
         return x;
     }
 }
+
 //This function should be invoked whenever "=" is pressed.
 function operate (x,y,z){
     if (y === "+"){
