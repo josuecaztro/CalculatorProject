@@ -4,33 +4,100 @@ body {
 
 #body-div {
     display: flex;
+    height: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
+h1, h3 {
+    color: rgb(200, 215, 241);
+    text-shadow: 2px 2px 2px black;
+    font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif
+
+}
+
+h1 {
+    margin-top: 120px;
+}
 #display {
-    background-color: lightgray;
-    padding: 5px;
+    background-color: rgb(220, 244, 255);
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 30px;
+    box-shadow: 2px 2px 2px black;
+    border: 1px solid black;
 }
 
 #calculator-div {
     background-color: rgb(67, 67, 121);
-    border: 5px solid rgb(55, 55, 100);
+    border: 3.5px solid black;
     border-radius: 7.5%;
     box-shadow: 2px 2px 2px black;
-    width: 100px;
-    padding: 15px;
+    width: 225px;
+    padding: 20px;
     justify-content: center;
     align-items: center;
+    margin-top: 50px;
+}
+
+.num-button:hover{
+    transition: transform 0.2s;
+    transform: scale(1.05);
+}
+
+.operators:hover{
+    transition: transform 0.2s;
+    transform: scale(1.05);
+}
+
+#decimal:hover{
+    transition: transform 0.2s;
+    transform: scale(1.05);
 }
 
 #calc-buttons {
+    display: flex;
     flex-wrap: wrap;
+    gap: 5px;
     padding: 5px;
 }
 
 p {
     font-size: 10px;
     color: white;
+}
+
+.num-button {
+    height: 50px; 
+    width: 50px;
+    background-color: orange;
+    box-shadow: 0.5px 0.5px 0.5px black;
+    border: 1px solid black;
+    font-family:'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+}
+
+.operators {
+    height: 50px;
+    width: 50px;
+    background-color: rgb(130, 200, 223);
+    box-shadow: 0.5px 0.5px 0.5px black;
+    border: 1px solid black;
+    font-family:'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+
+
+}
+
+#decimal {
+    height: 50px;
+    width: 50px;
+    background-color: rgb(163, 163, 163);
+    box-shadow: 0.5px 0.5px 0.5px black;
+    border: 1px solid black;
+    font-family:'Arial Narrow Bold', sans-serif;
+    font-size: 20px;
+
+
 }
